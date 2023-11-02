@@ -3,6 +3,9 @@ package com.sv.equipment.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sv.equipment.domain.enumeration.EquipmentStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -13,6 +16,9 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "equipment")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Equipment implements Serializable {
 
@@ -33,8 +39,6 @@ public class Equipment implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "equipment")
     @JsonIgnoreProperties(value = { "equipment" }, allowSetters = true)
     private Set<Job> jobs = new HashSet<>();
-
-    // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
         return this.id;

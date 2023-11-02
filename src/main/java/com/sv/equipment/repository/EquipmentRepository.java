@@ -1,6 +1,6 @@
-package com.sv.equipment;
+package com.sv.equipment.repository;
 
-import com.sv.domain.Equipment;
+import com.sv.equipment.domain.Equipment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
