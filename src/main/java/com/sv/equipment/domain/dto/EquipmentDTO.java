@@ -1,4 +1,6 @@
 package com.sv.equipment.domain.dto;
 
-public record EquipmentDTO() {
+import com.sv.equipment.domain.enumeration.EquipmentStatus;
+
+public record EquipmentDTO(long id, String name, EquipmentStatus equipmentStatus) {
 }
