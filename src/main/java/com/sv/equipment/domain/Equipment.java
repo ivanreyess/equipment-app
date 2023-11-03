@@ -30,11 +30,11 @@ public class Equipment implements Serializable {
     private Long id;
 
     @Column(name = "name")
-    private String name;
+    private java.lang.String name;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private EquipmentStatus status;
+    private String equipmentStatus;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "equipment")
     @JsonIgnoreProperties(value = { "equipment" }, allowSetters = true)
@@ -62,21 +62,21 @@ public class Equipment implements Serializable {
         return this;
     }
 
-    public void setName(String name) {
+    public void setName(java.lang.String name) {
         this.name = name;
     }
 
-    public EquipmentStatus getStatus() {
-        return this.status;
+    public String getEquipmentStatus() {
+        return this.equipmentStatus;
     }
 
-    public Equipment status(EquipmentStatus status) {
-        this.setStatus(status);
+    public Equipment status(String equipmentStatus) {
+        this.setEquipmentStatus(equipmentStatus);
         return this;
     }
 
-    public void setStatus(EquipmentStatus status) {
-        this.status = status;
+    public void setEquipmentStatus(String equipmentStatus) {
+        this.equipmentStatus = equipmentStatus;
     }
 
     public Set<Job> getJobs() {
@@ -131,11 +131,11 @@ public class Equipment implements Serializable {
 
     // prettier-ignore
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         return "Equipment{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", status='" + getStatus() + "'" +
+            ", equipmentStatus='" + getEquipmentStatus() + "'" +
             "}";
     }
 }

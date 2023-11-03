@@ -56,7 +56,6 @@ public class JobServiceImpl implements JobService {
             .findById(jobDTO.id())
             .map(existingJob -> {
                 jobMapper.partialUpdate(existingJob, jobDTO);
-
                 return existingJob;
             })
             .map(jobRepository::save)
