@@ -28,7 +28,7 @@ import java.util.Optional;
  * REST controller for managing {@link com.sv.equipment.domain.Equipment}.
  */
 @RestController
-@RequestMapping("/api/equipment")
+@RequestMapping("/api/v1/equipment")
 @Slf4j
 public class EquipmentController {
 
