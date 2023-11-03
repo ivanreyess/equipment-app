@@ -56,4 +56,11 @@ public interface EquipmentService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Delete the "id" job.
+     *
+     * @param jobId the id of the job entity.
+     */
+    void assignJob(Long jobId, Long equipmentId);
 }

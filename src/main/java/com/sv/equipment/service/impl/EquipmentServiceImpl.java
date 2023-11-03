@@ -1,10 +1,14 @@
 package com.sv.equipment.service.impl;
 
 import com.sv.equipment.domain.Equipment;
+import com.sv.equipment.domain.Job;
+import com.sv.equipment.domain.enumeration.EquipmentStatus;
 import com.sv.equipment.repository.EquipmentRepository;
 import com.sv.equipment.service.EquipmentService;
 import com.sv.equipment.domain.dto.EquipmentDTO;
 import com.sv.equipment.service.mapper.EquipmentMapper;
+import com.sv.equipment.util.exception.BadRequest;
+import com.sv.equipment.util.exception.NotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -81,5 +85,16 @@ public class EquipmentServiceImpl implements EquipmentService {
     public void delete(Long id) {
         log.debug("Request to delete Equipment : {}", id);
         equipmentRepository.deleteById(id);
+    }
+
+    @Override
+    public void assignJob(Long jobId, Long equipmentId) {
+        Optional<Equipment> result = equipmentRepository.findById(equipmentId);
+        if (result.isEmpty()) throw new NotFound("Equipment not found", "Equipment not found");
+        if (EquipmentStatus.IN_USE.name().equals(result.get().getEquipmentStatus())) throw new BadRequest("Equipment in use", "Invalid option");
+        Equipment equipment = result.get();
+        equipment.setJob(Job.builder().id(jobId).build());
+        equipment.setEquipmentStatus(EquipmentStatus.IN_USE.name());
+        save(equipmentMapper.toDto(equipment));
     }
 }

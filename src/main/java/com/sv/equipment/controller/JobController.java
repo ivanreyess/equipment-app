@@ -1,6 +1,7 @@
 package com.sv.equipment.controller;
 
 import com.sv.equipment.repository.JobRepository;
+import com.sv.equipment.service.EquipmentService;
 import com.sv.equipment.service.JobService;
 import com.sv.equipment.domain.dto.JobDTO;
 import com.sv.equipment.util.HeaderUtil;
@@ -37,6 +38,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class JobController {
 
     private static final String ENTITY_NAME = "job";
+    public static final String ENTITY_NOT_FOUND_MESSAGE = "Entity not found";
 
     @Value("${spring.application.name}")
     private String applicationName;
@@ -45,9 +47,12 @@ public class JobController {
 
     private final JobRepository jobRepository;
 
-    public JobController(JobService jobService, JobRepository jobRepository) {
+    private final EquipmentService equipmentService;
+
+    public JobController(JobService jobService, JobRepository jobRepository, EquipmentService equipmentService) {
         this.jobService = jobService;
         this.jobRepository = jobRepository;
+        this.equipmentService = equipmentService;
     }
 
     /**
@@ -61,7 +66,7 @@ public class JobController {
     public ResponseEntity<JobDTO> createJob(@RequestBody JobDTO jobDTO) throws URISyntaxException {
         log.debug("REST request to save Job : {}", jobDTO);
         if (jobDTO.id() != null) {
-            throw new BadRequest("A new jhob cannot already have an ID", applicationName);
+            throw new BadRequest("A new job cannot already have an ID", applicationName);
         }
         JobDTO result = jobService.save(jobDTO);
         return ResponseEntity
@@ -69,6 +74,27 @@ public class JobController {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.id().toString()))
             .body(result);
     }
+
+    /**
+     * {@code POST  /jobs} : Create a new job.
+     *
+     * @param jobId the jobDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new jobDTO, or with status {@code 400 (Bad Request)} if the job has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/{jobId}/equipment/{equipmentId}")
+    public ResponseEntity<JobDTO> assignTool(@PathVariable(value = "jobId") Long jobId, @PathVariable(value = "equipmentId") Long equipmentId) throws URISyntaxException {
+        log.debug("REST request to add a tool to a Job");
+        if (!(jobRepository.existsById(jobId))) {
+            throw new NotFound(ENTITY_NOT_FOUND_MESSAGE, applicationName);
+        }
+        equipmentService.assignJob(jobId, equipmentId);
+        return ResponseEntity
+                .ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, jobId.toString()))
+                .body(jobService.findOne(jobId).get());
+    }
+
 
     /**
      * {@code PUT  /jobs/:id} : Updates an existing job.
@@ -92,7 +118,7 @@ public class JobController {
         }
 
         if (!jobRepository.existsById(id)) {
-            throw new NotFound("Entity not found", applicationName);
+            throw new NotFound(ENTITY_NOT_FOUND_MESSAGE, applicationName);
         }
 
         JobDTO result = jobService.update(jobDTO);
@@ -125,7 +151,7 @@ public class JobController {
         }
 
         if (!jobRepository.existsById(id)) {
-            throw new NotFound("Entity not found", ENTITY_NAME);
+            throw new NotFound(ENTITY_NOT_FOUND_MESSAGE, ENTITY_NAME);
         }
 
         Optional<JobDTO> result = jobService.partialUpdate(jobDTO);
