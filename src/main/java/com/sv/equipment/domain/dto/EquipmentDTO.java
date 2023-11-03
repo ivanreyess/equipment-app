@@ -4,5 +4,5 @@ import com.sv.equipment.domain.enumeration.EquipmentStatus;
 import lombok.Builder;
 
 @Builder
-public record EquipmentDTO(long id, String name, EquipmentStatus equipmentStatus) {
+public record EquipmentDTO(Long id, String name, EquipmentStatus equipmentStatus) {
 }
