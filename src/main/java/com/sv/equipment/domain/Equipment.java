@@ -32,7 +32,6 @@ public class Equipment implements Serializable {
     @Column(name = "name")
     private java.lang.String name;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private String equipmentStatus;
 
