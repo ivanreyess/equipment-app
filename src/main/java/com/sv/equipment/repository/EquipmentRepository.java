@@ -1,6 +1,8 @@
 package com.sv.equipment.repository;
 
 import com.sv.equipment.domain.Equipment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +11,7 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface EquipmentRepository extends JpaRepository<Equipment, Long> {}
+public interface EquipmentRepository extends JpaRepository<Equipment, Long> {
+
+    Page<Equipment> findAll(Pageable pageable);
+}

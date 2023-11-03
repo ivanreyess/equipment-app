@@ -4,6 +4,7 @@ import com.sv.equipment.domain.Equipment;
 import com.sv.equipment.domain.Job;
 import com.sv.equipment.domain.dto.EquipmentDTO;
 import com.sv.equipment.domain.dto.JobDTO;
+import com.sv.equipment.domain.dto.SimpleJobDTO;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,5 +21,5 @@ public interface EquipmentMapper extends EntityMapper<EquipmentDTO, Equipment> {
     @Named("jobId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    JobDTO toDtoJobId(Job job);
+    SimpleJobDTO toDtoJobId(Job job);
 }
