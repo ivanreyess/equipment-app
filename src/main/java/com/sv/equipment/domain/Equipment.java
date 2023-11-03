@@ -1,15 +1,12 @@
 package com.sv.equipment.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sv.equipment.domain.enumeration.EquipmentStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A Equipment.
@@ -35,9 +32,9 @@ public class Equipment implements Serializable {
     @Column(name = "status")
     private String equipmentStatus;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "equipment")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "equipment" }, allowSetters = true)
-    private Set<Job> jobs = new HashSet<>();
+    private Job job;
 
     public Long getId() {
         return this.id;
@@ -78,38 +75,18 @@ public class Equipment implements Serializable {
         this.equipmentStatus = equipmentStatus;
     }
 
-    public Set<Job> getJobs() {
-        return this.jobs;
+    public void setJob(Job job) {
+        this.job = job;
     }
 
-    public void setJobs(Set<Job> jobs) {
-        if (this.jobs != null) {
-            this.jobs.forEach(i -> i.setEquipment(null));
-        }
-        if (jobs != null) {
-            jobs.forEach(i -> i.setEquipment(this));
-        }
-        this.jobs = jobs;
+    public Job getJob() {
+        return this.job;
     }
 
-    public Equipment jobs(Set<Job> jobs) {
-        this.setJobs(jobs);
+    public Equipment job(Job job) {
+        this.setJob(job);
         return this;
     }
-
-    public Equipment addJob(Job job) {
-        this.jobs.add(job);
-        job.setEquipment(this);
-        return this;
-    }
-
-    public Equipment removeJob(Job job) {
-        this.jobs.remove(job);
-        job.setEquipment(null);
-        return this;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -128,13 +105,12 @@ public class Equipment implements Serializable {
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
-    public java.lang.String toString() {
+    public String toString() {
         return "Equipment{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", equipmentStatus='" + getEquipmentStatus() + "'" +
-            "}";
+                "id=" + getId() +
+                ", name='" + getName() + "'" +
+                ", status='" + getEquipmentStatus() + "'" +
+                "}";
     }
 }

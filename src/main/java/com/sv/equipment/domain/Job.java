@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Job.
@@ -29,9 +31,9 @@ public class Job implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "jobs" }, allowSetters = true)
-    private Equipment equipment;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "job")
+    @JsonIgnoreProperties(value = { "job" }, allowSetters = true)
+    private Set<Equipment> equipment = new HashSet<>();
 
     public Long getId() {
         return this.id;
@@ -59,20 +61,39 @@ public class Job implements Serializable {
         this.name = name;
     }
 
-    public Equipment getEquipment() {
+    public Set<Equipment> getEquipment() {
         return this.equipment;
     }
 
-    public void setEquipment(Equipment equipment) {
+    public void setEquipment(Set<Equipment> equipment) {
+        if (this.equipment != null) {
+            this.equipment.forEach(i -> i.setJob(null));
+        }
+        if (equipment != null) {
+            equipment.forEach(i -> i.setJob(this));
+        }
         this.equipment = equipment;
     }
 
-    public Job equipment(Equipment equipment) {
+    public Job equipment(Set<Equipment> equipment) {
         this.setEquipment(equipment);
         return this;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    public Job addEquipment(Equipment equipment) {
+        this.equipment.add(equipment);
+        equipment.setJob(this);
+        return this;
+    }
+
+    public Job removeEquipment(Equipment equipment) {
+        this.equipment.remove(equipment);
+        equipment.setJob(null);
+        return this;
+    }
+
+
+
 
     @Override
     public boolean equals(Object o) {
