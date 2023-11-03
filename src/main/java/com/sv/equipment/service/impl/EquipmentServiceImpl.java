@@ -69,8 +69,9 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<EquipmentDTO> findAll(Pageable pageable) {
+    public Page<EquipmentDTO> findAll(Pageable pageable, String equipmentStatus) {
         log.debug("Request to get all Equipment");
+        if (null != equipmentStatus) return equipmentRepository.findByEquipmentStatus(pageable, equipmentStatus).map(equipmentMapper::toDto);
         return equipmentRepository.findAll(pageable).map(equipmentMapper::toDto);
     }
 

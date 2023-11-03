@@ -146,9 +146,9 @@ public class EquipmentController {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of equipment in body.
      */
     @GetMapping("")
-    public ResponseEntity<List<EquipmentDTO>> getAllEquipment(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<EquipmentDTO>> getAllEquipment(@org.springdoc.core.annotations.ParameterObject Pageable pageable, @RequestParam(required = false) String equipmentStatus) {
         log.debug("REST request to get a page of Equipment");
-        Page<EquipmentDTO> page = equipmentService.findAll(pageable);
+        Page<EquipmentDTO> page = equipmentService.findAll(pageable, equipmentStatus);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

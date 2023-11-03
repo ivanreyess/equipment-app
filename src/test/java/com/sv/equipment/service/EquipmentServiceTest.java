@@ -100,7 +100,7 @@ class EquipmentServiceTest {
         Pageable pageable = PageRequest.of(0, 20);
         given(equipmentRepository.findAll(any(Pageable.class))).willReturn(equipmentPage);
         given(equipmentMapperMock.toDto(any(Equipment.class))).willReturn(equipmentDTO);
-        Page<EquipmentDTO> result = equipmentService.findAll(pageable);
+        Page<EquipmentDTO> result = equipmentService.findAll(pageable, null);
         assertFalse(result.getContent().isEmpty());
     }
 

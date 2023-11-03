@@ -40,7 +40,7 @@ public interface EquipmentService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<EquipmentDTO> findAll(Pageable pageable);
+    Page<EquipmentDTO> findAll(Pageable pageable, String equipmentStatus);
 
     /**
      * Get the "id" equipment.
