@@ -26,11 +26,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 /**
  * REST controller for managing {@link com.sv.equipment.domain.Job}.
  */
 @RestController
 @RequestMapping("/api/v1/jobs")
+@CrossOrigin(methods = {POST, GET})
 @Slf4j
 public class JobController {
 
