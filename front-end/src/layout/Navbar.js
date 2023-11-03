@@ -14,6 +14,8 @@ export default function Navbar() {
                     <Link className='btn btn-outline-dark' to="/addJob">Add job</Link>
 
                     <Link className='btn btn-outline-dark' to="/addEquipment">Add Equipment</Link>
+
+                    <Link className='btn btn-outline-dark' to="/addEquipmentToJob">Add Equipment to Job</Link>
                     
                 </div>
             </nav>
