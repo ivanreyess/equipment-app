@@ -21,7 +21,7 @@ export default function AddEquipment() {
     const selectOptions = [
         { value: "AVAILABLE", label: "AVAILABLE" },
         { value: "IN_USE", label: "IN_USE" }
-      ];
+    ];
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -30,7 +30,11 @@ export default function AddEquipment() {
     };
 
     return (
+
         <div className='container'>
+            <br />
+            <br />
+            <br />
             <div className='row'>
                 <div className='col-md-6 offset-md3 border rounded p-4 mt-2 shadow'>
                     <h2>Add Equipment</h2>
@@ -41,14 +45,14 @@ export default function AddEquipment() {
                             </label>
                             <input type={'text'} className='form-control' placeholder='Enter equipment name' name='name' value={name} onChange={(e) => onInputChange(e)}></input>
 
-                            <br/>
+                            <br />
                             <select class="form-select" aria-label="Status" name='equipmentStatus' value={equipmentStatus} onChange={(e) => onInputChange(e)}>
-                               {
+                                {
                                     selectOptions.map(option => (
                                         <option value={option.value}>{option.label}</option>
                                     ))
 
-                               }
+                                }
                             </select>
 
                             <br />

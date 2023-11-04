@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
-export default function Home() {
+
+export default function Job() {
 
     const [jobs, setJobs] = useState([])
 
@@ -16,14 +18,21 @@ export default function Home() {
 
     return (
 
-        
+
         <div className='container'>
 
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
 
-            <h1>Jobs</h1>
+            <div class="row justify-content-center">
+                <div className='col-md-9'>
+                    <h1>Job</h1>
+                </div>
+                <div className='col'>
+                    <Link className='btn btn-success me-1' to="/addJob">Add job</Link >
+                </div>
+            </div>
             <div className='py-4'>
                 <table className="table border shadow">
                     <thead>
@@ -41,7 +50,7 @@ export default function Home() {
                                     <th scope="row" key={index}>{index + 1}</th>
                                     <td>{job.name}</td>
                                     <td>{
-                                            job.equipment.map((eq) =>  eq.name +  ', ' ) }</td>
+                                        job.equipment.map((eq) => eq.name + ', ')}</td>
                                     <td>
                                         <button className='btn btn-primary mx-2'>View</button>
                                         <button className='btn btn-outline-primary mx-2'>Edit</button>

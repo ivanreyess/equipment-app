@@ -24,7 +24,11 @@ export default function AddJob() {
     };
 
     return (
+
         <div className='container'>
+            <br />
+            <br />
+            <br />
             <div className='row'>
                 <div className='col-md-6 offset-md3 border rounded p-4 mt-2 shadow'>
                     <h2>Add job</h2>
@@ -36,7 +40,7 @@ export default function AddJob() {
                             <input type={'text'} className='form-control' placeholder='Enter job name' name='name' value={name} onChange={(e) => onInputChange(e)}></input>
                             <br />
                             <button type='submit' className='btn btn-outline-primary me-1'>Submit</button>
-                            <Link  className='btn btn-outline-danger me-1' to="/jobs">Cancel</Link >
+                            <Link className='btn btn-outline-danger me-1' to="/jobs">Cancel</Link >
                         </div>
                     </form>
                 </div>

@@ -1,7 +1,7 @@
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import NavbarComponent from './layout/NavbarComponent';
-import Home from './pages/Home';
+import Job from './pages/Job';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AddJob from './jobs/AddJob';
 import Equipment from './pages/Equipment';
@@ -14,7 +14,7 @@ function App() {
       <Router>
       <NavbarComponent/>
       <Routes>
-        <Route exact path='/jobs' element={<Home/>}/>
+        <Route exact path='/jobs' element={<Job/>}/>
         <Route exact path='/addJob' element={<AddJob/>}/>
         <Route exact path='/addEquipment' element={<AddEquipment/>}/>
         <Route exact path='/equipments' element={<Equipment/>}/>
