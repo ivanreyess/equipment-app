@@ -12,7 +12,7 @@ export default function Job() {
     }, [])
 
     const loadJobs = async () => {
-        const result = await axios.get("http://localhost:8080/api/v1/jobs")
+        const result = await axios.get("http://localhost:8081/api/v1/jobs")
         setJobs(result.data);
     }
 

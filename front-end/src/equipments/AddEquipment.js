@@ -25,7 +25,7 @@ export default function AddEquipment() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.post("http://localhost:8080/api/v1/equipments", equipment);
+        await axios.post("http://localhost:8081/api/v1/equipments", equipment);
         navigate("/equipments")
     };
 

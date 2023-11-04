@@ -19,7 +19,7 @@ export default function AddJob() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.post("http://localhost:8080/api/v1/jobs", job);
+        await axios.post("http://localhost:8081/api/v1/jobs", job);
         navigate("/jobs")
     };
 

@@ -25,12 +25,12 @@ export default function AddEquipmentToJob() {
     };
 
     const loadEquipments = async () => {
-        const result = await axios.get("http://localhost:8080/api/v1/equipments?equipmentStatus=AVAILABLE")
+        const result = await axios.get("http://localhost:8081/api/v1/equipments?equipmentStatus=AVAILABLE")
         setEquipments(result.data)
     }
 
     const loadJobs = async () => {
-        const result = await axios.get("http://localhost:8080/api/v1/jobs")
+        const result = await axios.get("http://localhost:8081/api/v1/jobs")
         setJobs(result.data);
     }
 
@@ -38,7 +38,7 @@ export default function AddEquipmentToJob() {
     const onSubmit = async (e) => {
         e.preventDefault();
         console.log(job);
-        await axios.post("http://localhost:8080/api/v1/jobs/" + job.jobId + "/equipment/" + job.equipmentId);
+        await axios.post("http://localhost:8081/api/v1/jobs/" + job.jobId + "/equipment/" + job.equipmentId);
         navigate("/jobs")
     };
 

@@ -13,7 +13,7 @@ export default function Equipment() {
     }, [])
 
     const loadEquipment = async () => {
-        const result = await axios.get("http://localhost:8080/api/v1/equipments")
+        const result = await axios.get("http://localhost:8081/api/v1/equipments")
         setEquipment(result.data);
     }
 
@@ -26,7 +26,7 @@ export default function Equipment() {
                 <br />
 
                 <div className='container'>
-                    <div class="row justify-content-center">
+                    <div className="row justify-content-center">
                         <div className='col-md-9'>
                             <h1>Equipments</h1>
                         </div>
