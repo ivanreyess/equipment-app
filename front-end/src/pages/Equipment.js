@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Row, Col, Alert } from 'reactstrap';
+
 
 export default function Equipment() {
 
@@ -15,16 +17,25 @@ export default function Equipment() {
     }
 
     return (
-        <div className='container'>
+
+        <Row>
+           <Col className="pad">
+            <br/>
+            <br/>
+            <br/>
+
+            <h1>Equipments</h1>
+
+           <div className='container'>
             <div className='py-4'>
                 <table className="table border shadow">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Status</th> 
-                            <th scope="col">Job</th>               
-                            <th scope="col">Action</th>                 
+                            <th scope="col">Status</th>
+                            <th scope="col">Job</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,7 +45,7 @@ export default function Equipment() {
                                     <th scope="row" key={index}>{index + 1}</th>
                                     <td>{equipment.name}</td>
                                     <td>{equipment.equipmentStatus}</td>
-                                    <td>{equipment.job?.name}</td>                                     
+                                    <td>{equipment.job?.name}</td>
                                     <td>
                                         <button className='btn btn-primary mx-2'>View</button>
                                         <button className='btn btn-outline-primary mx-2'>Edit</button>
@@ -47,5 +58,10 @@ export default function Equipment() {
                 </table>
             </div>
         </div>
+           </Col>
+
+        </Row>
+
+        
     )
 }

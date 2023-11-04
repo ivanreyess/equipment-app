@@ -7,10 +7,7 @@ export default function AddEquipmentToJob() {
     let navigate = useNavigate();
 
     const [job, setJob] = useState({
-        jobId: ""
-    });
-
-    const [equipment, setEquipment] = useState({
+        jobId: "",
         equipmentId: ""
     });
 
@@ -22,9 +19,6 @@ export default function AddEquipmentToJob() {
         loadEquipments();
         loadJobs();
     }, [])
-
-    const { jobId } = job;
-    const { equipmentId } = equipment;
 
     const onInputChange = (e) => {
         setJob({ ...job, [e.target.name]: e.target.value })
@@ -41,47 +35,54 @@ export default function AddEquipmentToJob() {
     }
 
 
-
     const onSubmit = async (e) => {
         e.preventDefault();
-        // await axios.post("http://localhost:8080/api/v1/jobs", job);
-        // navigate("/jobs")
-        // console.log(job);
+        console.log(job);
+        await axios.post("http://localhost:8080/api/v1/jobs/" + job.jobId + "/equipment/" + job.equipmentId);
+        navigate("/jobs")
     };
 
     return (
         <div className='container'>
+
+            <br/>
+            <br/>
+            <br/>
+
+            <h1>Assign Equipment </h1>
             <div className='row'>
-                <div className='col-md-6 offset-md3 border rounded p-4 mt-2 shadow'>
-                    <h2>Add Equipment to Job</h2>
+            <div className='col-md-3 align="center"'/>    
+                <div className='col-md-6 align="center" border rounded p-4 mt-2 shadow'>
                     <form onSubmit={(e) => onSubmit(e)}>
                         <div className='mb-3'>
                             <label htmlFor='jobId' className='form-label'>
                                 Job
                             </label>
-                            <select class="form-select" aria-label="Status" name='jobId' value={job} onChange={(e) => onInputChange(e)} >
-                            <option value="">Select job</option>
-                            {
+                            <select class="form-select" aria-label="Status" name='jobId' onChange={(e) => {
+                                onInputChange(e)
+                            }}>
+                                <option value="">Select job</option>
+                                {
                                     jobs.map(option => (
                                         <option value={option.id}>{option.name}</option>
                                     ))
-
-                               }
+                                }
                             </select>
                             <br />
                             <label htmlFor='equipmentId' className='form-label'>
                                 Equipment
                             </label>
-                            <select class="form-select" aria-label="Status" name='equipmentId'>
-                            <option value="">Select equipment</option>
-                            {
+                            <select class="form-select" aria-label="Status" name='equipmentId' onChange={(e) => {
+                                onInputChange(e)
+                            }}>
+                                <option value="">Select equipment</option>
+                                {
                                     equipments.map(option => (
                                         <option value={option.id}>{option.name}</option>
                                     ))
-
-                               }
+                                }
                             </select>
-                            <br/>
+                            <br />
                             <button type='submit' className='btn btn-outline-primary me-1'>Submit</button>
                             <Link className='btn btn-outline-danger me-1' to="/addEquipmentToJob">Cancel</Link>
                         </div>

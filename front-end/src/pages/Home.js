@@ -15,7 +15,15 @@ export default function Home() {
     }
 
     return (
+
+        
         <div className='container'>
+
+            <br/>
+            <br/>
+            <br/>
+
+            <h1>Jobs</h1>
             <div className='py-4'>
                 <table className="table border shadow">
                     <thead>
@@ -32,7 +40,8 @@ export default function Home() {
                                 <tr>
                                     <th scope="row" key={index}>{index + 1}</th>
                                     <td>{job.name}</td>
-                                    <td>{job.equipment.map((eq) => eq.name + ' ')  /*job.equipment[0].name}*/}</td>
+                                    <td>{
+                                            job.equipment.map((eq) =>  eq.name +  ', ' ) }</td>
                                     <td>
                                         <button className='btn btn-primary mx-2'>View</button>
                                         <button className='btn btn-outline-primary mx-2'>Edit</button>
