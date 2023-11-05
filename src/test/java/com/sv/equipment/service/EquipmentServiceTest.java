@@ -75,6 +75,7 @@ class EquipmentServiceTest {
     @Test
     void update() {
         Equipment savedEquipment = equipmentMapper.toEntity(equipmentDTO);
+        given(equipmentRepository.findById(any(Long.class))).willReturn(Optional.of(savedEquipment));
         given(equipmentRepository.save(any(Equipment.class))).willReturn(savedEquipment);
         given(equipmentMapperMock.toEntity(any(EquipmentDTO.class))).willReturn(savedEquipment);
         given(equipmentMapperMock.toDto(any(Equipment.class))).willReturn(equipmentDTO);

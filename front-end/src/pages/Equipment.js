@@ -54,7 +54,6 @@ export default function Equipment() {
                                             <td>{equipment.equipmentStatus}</td>
                                             <td>{equipment.job?.name}</td>
                                             <td>
-                                                <button className='btn btn-primary mx-2'>View</button>
                                                 <Link className='btn btn-outline-primary mx-2' to={`/editEquipment/${equipment.id}`}>Edit</Link>
                                             </td>
                                         </tr>

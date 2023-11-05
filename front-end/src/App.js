@@ -8,6 +8,7 @@ import Equipment from './pages/Equipment';
 import AddEquipment from './equipments/AddEquipment';
 import AddEquipmentToJob from './jobs/AddEquipmentToJob';
 import EditEquipment from './equipments/EditEquipment';
+import EditJob from './jobs/EditJob';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route exact path='/equipments' element={<Equipment/>}/>
         <Route exact path='/addEquipmentToJob' element={<AddEquipmentToJob/>}/>
         <Route exact path='/editEquipment/:id' element={<EditEquipment/>}/>
+        <Route exact path='/editJob/:id' element={<EditJob/>}/>
       </Routes>
       </Router>
 
