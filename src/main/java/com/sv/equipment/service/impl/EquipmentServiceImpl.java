@@ -47,7 +47,14 @@ public class EquipmentServiceImpl implements EquipmentService {
     @Override
     public EquipmentDTO update(EquipmentDTO equipmentDTO) {
         log.debug("Request to update Equipment : {}", equipmentDTO);
+        Optional<Equipment> equipmentOptional = equipmentRepository.findById(equipmentDTO.id());
+        if (equipmentOptional.isEmpty()) return EquipmentDTO.builder().build();
         Equipment equipment = equipmentMapper.toEntity(equipmentDTO);
+        if (EquipmentStatus.AVAILABLE.name().equals(equipment.getEquipmentStatus()))
+            equipment.setJob(null);
+        else {
+            equipment.setJob(equipmentOptional.get().getJob());
+        }
         equipment = equipmentRepository.save(equipment);
         return equipmentMapper.toDto(equipment);
     }
@@ -97,5 +104,13 @@ public class EquipmentServiceImpl implements EquipmentService {
         equipment.setJob(Job.builder().id(jobId).build());
         equipment.setEquipmentStatus(EquipmentStatus.IN_USE.name());
         save(equipmentMapper.toDto(equipment));
+    }
+
+    @Override
+    public void removeJob(EquipmentDTO equipmentDTO) {
+        log.debug("Request to remove job Equipment : {}", equipmentDTO);
+        Equipment equipment = equipmentMapper.toEntity(equipmentDTO);
+        equipment.setEquipmentStatus(EquipmentStatus.AVAILABLE.name());
+        equipment.setJob(null);
     }
 }

@@ -24,15 +24,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
  * REST controller for managing {@link com.sv.equipment.domain.Equipment}.
  */
 @RestController
 @RequestMapping("/api/v1/equipments")
-@CrossOrigin(methods = {POST, GET})
+@CrossOrigin(methods = {POST, GET, PUT})
 @Slf4j
 public class EquipmentController {
 

@@ -87,7 +87,7 @@ To execute the desired script you can copy and paste on your terminal.
 
 * Swagger doc: http://localhost:8081/swagger-ui/index.html
 * Job entrypoint: http://localhost:8081/api/jobs/
-* Job entrypoint: http://localhost:8081/api/equipments/
+* Equipment entrypoint: http://localhost:8081/api/equipments/
 
 
 ### Accessing web app :star:

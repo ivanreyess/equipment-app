@@ -52,7 +52,6 @@ export default function Job() {
                                     <td>{
                                         job.equipment.map((eq) => eq.name + ', ')}</td>
                                     <td>
-                                        <button className='btn btn-primary mx-2'>View</button>
                                         <button className='btn btn-outline-primary mx-2'>Edit</button>
                                     </td>
                                 </tr>
